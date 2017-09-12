@@ -1,0 +1,51 @@
+﻿<div class="container inputContainer">
+  <div class="row">
+    <div class="col-lg-12">
+      <input id="firstNameInput" name="firstName">
+      <input id="lastNameInput" name="lastName">
+      <button id="insertButton" name="submit">Insert</button>
+    </div>
+  </div>
+  <a href="home.php">Back</a>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $("#insertButton").click(function(){
+      var firstName = $("#firstNameInput").val();
+      var lastName = $("#lastNameInput").val();
+      console.log(firstName);
+      console.log(lastName);
+      if(firstName != "" && lastName != ""){
+        dataString = "firstName=" + firstName;
+        dataString += "&lastName=" + lastName;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "addNewAuthor.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.setRequestHeader("Content-length", dataString.length);
+        xhttp.setRequestHeader("Connection", "close");
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var stringArray = this.responseText;
+          alert(stringArray);
+
+        }
+      }
+      xhttp.send(dataString);
+    }
+
+
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+</script>
